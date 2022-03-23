@@ -138,19 +138,16 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet:
   def union(that: TweetSet): TweetSet = right.union(left.union(that.incl(elem)))
 
   def mostRetweeted: Tweet = 
-    val leftMax = Try(left.mostRetweeted) match {
+    List(elem, (Try(left.mostRetweeted) match {
       case Success(x) => x
-      case Failure(_) => Tweet("","",-1)
-    }
-    val rightMax = Try(right.mostRetweeted) match {
-      case Success(x) => x 
-      case Failure(_) => Tweet("","",-1)
-    }
-    val elemRetweets = elem.retweets
-    val max = elemRetweets.max(leftMax.retweets).max(rightMax.retweets)
-    if max == leftMax.retweets then leftMax
-    else if max == rightMax.retweets then rightMax
-    else elem
+      case Failure(_) => null
+    }), (Try(right.mostRetweeted) match {
+      case Success(x) => x
+      case Failure(_) => null
+    })).maxBy( x => Try(x.retweets) match {
+      case Success(x) => x
+      case Failure(_) => -1
+    })
 
   def descendingByRetweetAcc(accum: TweetList): TweetList = 
     val most = mostRetweeted
