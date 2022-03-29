@@ -56,6 +56,23 @@ class HuffmanSuite extends munit.FunSuite:
     assertEquals(singleton(List(Leaf('a', 1), Leaf('b', 1))), false)
   }
 
+  test("decoded secret"){
+    println(decodedSecret.mkString)
+  }
+
+  test("convert"){
+    new TestTrees:
+      val table = convert(t1)
+      println(table)
+      println(codeBits(table)('b'))
+  }
+
+  test("quick encode"){
+    new TestTrees:
+      assertEquals(decode(t1, quickEncode(t1)("ab".toList)), "ab".toList)
+  }
+  
+
 
   import scala.concurrent.duration.*
   override val munitTimeout = 10.seconds
