@@ -3,3 +3,8 @@
 */.bsp/
 Week 1/project/target/*
 Week 4/patmat/.bsp/sbt.json
+Week 6/.bloop/*
+Week 6/project/project/*
+Week 6/project/target/*
+Week 6/project/.bloop/bloop.settings.json
+Week 6/project/.bloop/week-6-build.json
